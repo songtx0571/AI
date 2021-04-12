@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.howei.mapper.CirculatingPumpMapper" >
+
+    <sql id="paramSql">
+        <trim suffixOverrides=",">
+            <if test="temp1!=null">
+                temp1 tempData,
+            </if>
+            <if test="temp2!=null">
+                temp2 tempData,
+            </if>
+            <if test="temp3!=null">
+                temp3 tempData,
+            </if>
+            <if test="temp4!=null">
+                temp4 tempData,
+            </if>
+            <if test="temp5!=null">
+                temp5 tempData,
+            </if>
+            <if test="temp6!=null">
+                temp6 tempData,
+            </if>
+            <if test="temp7!=null">
+                temp7 tempData,
+            </if>
+            <if test="temp8!=null">
+                temp8 tempData,
+            </if>
+            <if test="temp9!=null">
+                temp9 tempData,
+            </if>
+            <if test="temp10!=null">
+                temp10 tempData,
+            </if>
+            <if test="temp11!=null">
+                temp11 tempData,
+            </if>
+            <if test="temp12!=null">
+                temp12 tempData,
+            </if>
+            <if test="temp13!=null">
+                temp13 tempData,
+            </if>
+            <if test="temp14!=null">
+                temp14 tempData,
+            </if>
+            <if test="temp15!=null">
+                temp15 tempData,
+            </if>
+            <if test="temp16!=null">
+                temp16 tempData,
+            </if>
+            <if test="temp17!=null">
+                temp17 tempData,
+            </if>
+            <if test="temp18!=null">
+                temp18 tempData,
+            </if>
+            <if test="temp19!=null">
+                temp19 tempData,
+            </if>
+            <if test="temp20!=null">
+                temp20 tempData,
+            </if>
+            <if test="temp21!=null">
+                temp21 tempData,
+            </if>
+            <if test="temp22!=null">
+                temp22 tempData,
+            </if>
+            <if test="temp23!=null">
+                temp23 tempData,
+            </if>
+            <if test="temp24!=null">
+                temp24 tempData,
+            </if>
+            <if test="temp25!=null">
+                temp25 tempData,
+            </if>
+            <if test="temp26!=null">
+                temp26 tempData,
+            </if>
+            <if test="temp27!=null">
+                temp27 tempData,
+            </if>
+            <if test="temp28!=null">
+                temp28 tempData,
+            </if>
+            <if test="temp29!=null">
+                temp29 tempData,
+            </if>
+            <if test="temp30!=null">
+                temp30 tempData,
+            </if>
+            <if test="temp31!=null">
+                temp31 tempData,
+            </if>
+            <if test="temp32!=null">
+                temp32 tempData,
+            </if>
+            <if test="temp33!=null">
+                temp33 tempData,
+            </if>
+            <if test="temp34!=null">
+                temp34 tempData,
+            </if>
+            <if test="temp35!=null">
+                temp35 tempData,
+            </if>
+            <if test="temp36!=null">
+                temp36 tempData,
+            </if>
+            <if test="temp37!=null">
+                temp37 tempData,
+            </if>
+            <if test="temp38!=null">
+                temp38 tempData,
+            </if>
+            <if test="temp39!=null">
+                temp39 tempData,
+            </if>
+            <if test="temp40!=null">
+                temp40 tempData,
+            </if>
+            <if test="temp41!=null">
+                temp41 tempData,
+            </if>
+            <if test="temp42!=null">
+                temp42 tempData,
+            </if>
+            <if test="temp43!=null">
+                temp43 tempData,
+            </if>
+            <if test="temp44!=null">
+                temp44 tempData,
+            </if>
+            <if test="temp45!=null">
+                temp45 tempData,
+            </if>
+            <if test="temp46!=null">
+                temp46 tempData,
+            </if>
+            <if test="temp47!=null">
+                temp47 tempData,
+            </if>
+            <if test="temp48!=null">
+                temp48 tempData,
+            </if>
+            <if test="temp49!=null">
+                temp49 tempData,
+            </if>
+            <if test="temp50!=null">
+                temp50 tempData,
+            </if>
+            <if test="temp51!=null">
+                temp51 tempData,
+            </if>
+            <if test="temp52!=null">
+                temp52 tempData,
+            </if>
+            <if test="temp53!=null">
+                temp53 tempData,
+            </if>
+            <if test="temp54!=null">
+                temp54 tempData,
+            </if>
+            <if test="temp55!=null">
+                temp55 tempData,
+            </if>
+            <if test="temp56!=null">
+                temp56 tempData,
+            </if>
+            <if test="temp57!=null">
+                temp57 tempData,
+            </if>
+            <if test="temp58!=null">
+                temp58 tempData,
+            </if>
+            <if test="temp59!=null">
+                temp59 tempData,
+            </if>
+            <if test="temp60!=null">
+                temp60 tempData,
+            </if>
+            <if test="temp61!=null">
+                temp61 tempData,
+            </if>
+            <if test="temp62!=null">
+                temp62 tempData,
+            </if>
+            <if test="temp63!=null">
+                temp63 tempData,
+            </if>
+            <if test="temp64!=null">
+                temp64 tempData,
+            </if>
+            time,
+        </trim>
+    </sql>
+
+    <select id="getCirculationPumpList" parameterType="java.util.HashMap" resultType="com.howei.pojo.CirculatingPump">
+        select
+        <include refid="paramSql"/>
+        from  circulating_pump
+        <where>
+            <if test="address!=null and address!=''">
+                and address=#{address}
+            </if>
+        </where>
+        order by time desc
+        <if test="page!=null and pageSize!=null">
+            limit ${page},${pageSize}
+        </if>
+    </select>
+</mapper>

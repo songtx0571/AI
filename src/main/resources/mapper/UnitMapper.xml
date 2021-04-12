@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.howei.mapper.UnitMapper" >
+
+    <resultMap id="unitMap" type="com.howei.pojo.Unit">
+        <result column="id" property="id"></result>
+        <result column="type" property="type"></result>
+        <result column="nuit" property="nuit"></result>
+        <result column="code" property="code"></result>
+        <result column="mold" property="mold"></result>
+        <result column="department" property="department"></result>
+    </resultMap>
+
+    <select id="getUnityMap" parameterType="java.util.HashMap" resultType="java.util.HashMap" resultMap="unitMap">
+        select id,nuit from unit
+        <where>
+            <if test="type!=null">
+                and mold=#{type}
+            </if>
+            <if test="departmentId!=null">
+                and department=#{departmentId}
+            </if>
+            <if test="bothType!=null">
+                and bothType=#{bothType}
+            </if>
+        </where>
+    </select>
+</mapper>

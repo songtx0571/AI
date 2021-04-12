@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.howei.mapper.RaspberryPiMapper" >
+    <resultMap id="RPMap" type="com.howei.pojo.AiConfigure">
+        <result column="id" property="id"></result>
+        <result column="address" property="address"></result>
+        <result column="worked" property="worked"></result>
+        <result column="Inquiry" property="Inquiry"></result>
+        <result column="type" property="type"></result>
+    </resultMap>
+
+    <select id="getAddressList" parameterType="java.util.HashMap" resultMap="RPMap">
+        select distinct address from  ai_configure
+    </select>
+
+    <select id="getRaspberryPiList" parameterType="java.util.HashMap" resultMap="RPMap">
+        select * from ai_configure
+        <where>
+            <if test="address!=null and address!=''">
+                address=#{address}
+            </if>
+        </where>
+        <if test="page!=null and pageSize!=null">
+            limit ${page},${pageSize}
+        </if>
+    </select>
+
+    <update id="updAiConfigure" useGeneratedKeys="true" keyProperty="id" parameterType="java.util.HashMap">
+        update ai_configure set worked=#{worked},Inquiry=#{inquiry} where `type`=#{type} and address=#{address}
+    </update>
+</mapper>

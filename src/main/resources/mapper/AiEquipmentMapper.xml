@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.howei.mapper.AiEquipmentMapper" >
+
+    <resultMap id="aiequipMap" type="com.howei.pojo.AiEquipment">
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="status" property="status"></result>
+        <result column="departmentId" property="departmentId"></result>
+    </resultMap>
+
+    <select id="getAiEquipemntList" parameterType="java.util.HashMap" resultType="com.howei.pojo.AiEquipment">
+        select e.id,e.name,e.status,e.departmentId,c.name departmentName from ai_equipment e
+        left join company c on c.id=e.departmentId
+        <where>
+            <if test="departmentId!=null and departmentId!=''">
+                departmentId=#{departmentId}
+            </if>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addAiEquipemnt" useGeneratedKeys="true" keyProperty="id" parameterType="com.howei.pojo.AiEquipment">
+        insert into ai_equipment(`name`,status,departmentId) values (#{name},#{status},#{departmentId})
+    </insert>
+
+    <update id="updAiEquipemnt" useGeneratedKeys="true" keyProperty="id" parameterType="com.howei.pojo.AiEquipment">
+        update ai_equipment
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="departmentId!=null">
+                departmentId=#{departmentId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getAiEquipemnt" parameterType="java.util.HashMap" resultType="com.howei.pojo.AiEquipment">
+        select * from ai_equipment
+        <where>
+            <if test="name!=null and name!=''">
+                and `name`=#{name}
+            </if>
+            <if test="departmentId!=null and departmentId!=''">
+                and departmentId=#{departmentId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAiEquipmentMap" parameterType="String" resultType="com.howei.pojo.AiEquipment">
+        select * from ai_equipment where departmentId=#{departmentId}
+    </select>
+
+    <select id="getById" parameterType="Integer" resultType="com.howei.pojo.AiEquipment">
+        select * from ai_equipment where id=#{id}
+    </select>
+
+</mapper>
