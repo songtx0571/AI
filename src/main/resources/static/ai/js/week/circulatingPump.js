@@ -88,14 +88,16 @@ function showCirculatingPump() {
                $("#addressListHidden1").val(data.address);
                $("#unitListHidden").val(data.unit);
                $("#unitPointListHidden").val(data.measuringType);//测点类型
+               $("#equSysList").val(data.systemId);//系统
+               $("#equList").val(data.equipId);//设备
+               $("#equSysListHidden").val(data.systemId);
+               $("#equListHidden").val(data.equipId);
                if (equipment) {
                    var dou = equipment.indexOf(",");
                    var system = equipment.substring(0,dou);
                    var equ = equipment.substring(dou+1);
-                   $("#equSysList").val(system);//系统
-                   $("#equList").val(equ);//设备
-                   $("#equSysListHidden").val(system);
-                   $("#equListHidden").val(equ);
+                   $("#equSysListHidden1").val(system);
+                   $("#equListHidden1").val(equ);
                }else{
                    $("#equSysList").val("");//系统
                    $("#equList").val("");//设备
@@ -135,7 +137,7 @@ function showEquUnityMap(departmentId) {
                 $("#equSysList").empty();
                 var option = "<option value='0' >请选择系统名称</option>";
                 for (var i = 0; i < data.length; i++) {
-                    option += "<option value='" + data[i].text + "'>" + data[i].text + "</option>";
+                    option += "<option value='" + data[i].id + "'>" + data[i].text + "</option>";
                 }
                 $('#equSysList').append(option);
                 form.render();//菜单渲染 把内容加载进去
@@ -143,6 +145,7 @@ function showEquUnityMap(departmentId) {
         });
         form.on('select(equSysList)', function (data) {
             $("#equSysListHidden").val(data.value);//得到被选中的值
+            $("#equSysListHidden1").val(data.elem[data.elem.selectedIndex].text)
         });
         $.ajax({
             type: "GET",
@@ -153,7 +156,7 @@ function showEquUnityMap(departmentId) {
                 $("#equList").empty();
                 var option = "<option value='0' >请选择设备名称</option>";
                 for (var i = 0; i < data.length; i++) {
-                    option += "<option value='" + data[i].text + "'>" + data[i].text + "</option>";
+                    option += "<option value='" + data[i].id + "'>" + data[i].text + "</option>";
                 }
                 $('#equList').append(option);
                 form.render();//菜单渲染 把内容加载进去
@@ -161,6 +164,7 @@ function showEquUnityMap(departmentId) {
         });
         form.on('select(equList)', function (data) {
             $("#equListHidden").val(data.value);//得到被选中的值
+            $("#equListHidden1").val(data.elem[data.elem.selectedIndex].text);
         });
         $.ajax({
             type: "GET",
@@ -171,14 +175,15 @@ function showEquUnityMap(departmentId) {
                 $("#unitList").empty();
                 var option = "<option value='0' >请选择单位名称</option>";
                 for (var i = 0; i < data.length; i++) {
-                    option += "<option value='" + data[i].text + "'>" + data[i].text + "</option>";
+                    option += "<option value='" + data[i].id + "'>" + data[i].text + "</option>";
                 }
                 $('#unitList').append(option);
                 form.render();//菜单渲染 把内容加载进去
             }
         });
         form.on('select(unitList)', function (data) {
-            $("#unitListHidden").val(data.value);//得到被选中的值
+            $("#unitListHidden").val(data.elem[data.elem.selectedIndex].text);//得到被选中的值
+            $("#unitListIdHidden").val(data.value);
         });
         $.ajax({
             type: "GET",
@@ -189,14 +194,15 @@ function showEquUnityMap(departmentId) {
                 $("#unitPointList").empty();
                 var option = "<option value='0' >请选择测点类型</option>";
                 for (var i = 0; i < data.length; i++) {
-                    option += "<option value='" + data[i].text + "'>" + data[i].text + "</option>";
+                    option += "<option value='" + data[i].id + "'>" + data[i].text + "</option>";
                 }
                 $('#unitPointList').append(option);
                 form.render();//菜单渲染 把内容加载进去
             }
         });
         form.on('select(unitPointList)', function (data) {
-            $("#unitPointListHidden").val(data.value);//得到被选中的值
+            $("#unitPointListHidden").val(data.elem[data.elem.selectedIndex].text);//得到被选中的值
+            $("#unitPointListIdHidden").val(data.value);//得到被选中的值
         });
     })
 }
@@ -206,9 +212,13 @@ function updConfigure() {
     var departmentId=$("#departListListHidden").val();
     var address = $("#addressListHidden1").val();//地址
     var measuringPoint = $("#measuringPoint").val();//测点
-    var equipment = $("#equSysListHidden").val()+","+$("#equListHidden").val();
+    var equipment = $("#equSysListHidden1").val()+","+$("#equListHidden1").val();
     var unit = $("#unitListHidden").val();
     var measuringType = $("#unitPointListHidden").val();//测点类型
+    var systemId = Number($("#equSysListHidden").val());//系统Id
+    var equipId = Number($("#equListHidden").val());//设备Id
+    var measuringTypeId =  Number($("#unitPointListIdHidden").val());//测点类型
+    var unitId = Number($("#unitListIdHidden").val());//单位0
     if ( $("#equSysListHidden").val() == "" ||  $("#equSysListHidden").val() == "0") {
         layer.alert("请选择系统名称");
         return;
@@ -229,7 +239,7 @@ function updConfigure() {
         type: "GET",
         url: path + "/ai/dataCon/updateDataConfiguration",
         dataType: "json",
-        data: {id: id, address: address, measuringPoint: measuringPoint, equipment: equipment, unit: unit, measuringType: measuringType,departmentId:departmentId},
+        data: {id: id, address: address, measuringPoint: measuringPoint, equipment: equipment, unit: unit, measuringType: measuringType,departmentId:departmentId,systemId:systemId,equipId:equipId,measuringTypeId:measuringTypeId,unitId:unitId},
         success: function (data) {
             showCirculatingPump();
             layer.closeAll();

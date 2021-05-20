@@ -76,6 +76,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="equSysListHidden">
+                <input type="hidden" id="equSysListHidden1">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">系统名称</label>
@@ -86,6 +87,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="equListHidden">
+                <input type="hidden" id="equListHidden1">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">设备名称</label>
@@ -96,6 +98,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="unitListHidden">
+                <input type="hidden" id="unitListIdHidden">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">单位</label>
@@ -106,6 +109,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="unitPointListHidden">
+                <input type="hidden" id="unitPointListIdHidden">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">测点类型</label>

@@ -52,6 +52,15 @@ public class WeatherController {
         return "circulatingPump";
     }
 
+    /**
+     * 跳转边缘计算配置页面
+     * @return
+     */
+    @RequestMapping("/toEdgeCalc")
+    public String edgeCalc(){
+        return "edgeCalc";
+    }
+
     @RequestMapping("/getWeatherList")
     @ResponseBody
     public EasyuiResult getWeatherList(HttpServletRequest request){
