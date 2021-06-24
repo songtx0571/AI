@@ -25,4 +25,9 @@ public class AiConfigurationDataServiceImpl implements AiConfigurationDataServic
     public List<AiConfigurationData> getAiConfigureDataList(Map map) {
         return aiConfigurationDataMapper.getAiConfigureDataList(map);
     }
+
+    @Override
+    public Long getAiConfigureDataCountByMap(Map map) {
+        return aiConfigurationDataMapper.getAiConfigureDataCountByMap(map);
+    }
 }

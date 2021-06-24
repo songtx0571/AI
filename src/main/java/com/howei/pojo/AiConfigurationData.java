@@ -5,7 +5,7 @@ package com.howei.pojo;
  */
 public class AiConfigurationData {
 
-    private Integer id;
+    private Long id;
     private Integer aiConfigurationId;
     private Integer addressId;//创建机器ID
     private String time;
@@ -15,11 +15,11 @@ public class AiConfigurationData {
 
     private String unit;//单位
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

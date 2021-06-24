@@ -1,5 +1,6 @@
 package com.howei.config;
 
+import com.howei.config.redis.RedisSessionDao;
 import com.howei.realm.LoginRealm;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class ShiroConfig {
 
     @Value("${shiro.loginUrl}")

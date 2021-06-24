@@ -259,14 +259,14 @@ public class DataConfigurationController {
             map.put("endTime",endTime);
         }
 
-        List<AiConfigurationData> total=aiConfigurationDataService.getAiConfigureDataList(map);
+        Long totalCount =aiConfigurationDataService.getAiConfigureDataCountByMap(map);
         map.put("page",offset);
         map.put("pageSize",rows);
         List<AiConfigurationData> list=aiConfigurationDataService.getAiConfigureDataList(map);
         LayuiResult result=new LayuiResult();
         result.setCode(0);
         result.setData(list);
-        result.setCount(total.size());
+        result.setCount(totalCount);
         return JSON.toJSONString(result);
     }
 }

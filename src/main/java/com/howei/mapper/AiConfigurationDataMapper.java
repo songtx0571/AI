@@ -14,4 +14,6 @@ public interface AiConfigurationDataMapper {
     int insList(@Param("set") Set<AiConfigurationData> aList);
 
     List<AiConfigurationData> getAiConfigureDataList(Map map);
+
+    Long getAiConfigureDataCountByMap(Map map);
 }

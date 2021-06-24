@@ -4,24 +4,24 @@ import java.util.List;
 
 public class LayuiResult {
 
-    private int count;//总数
-    private List data;//数据
+    private Object count;//总数
+    private Object data;//数据
     private int code;
     private String msg;
 
-    public int getCount() {
+    public Object getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Object count) {
         this.count = count;
     }
 
-    public List getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(List data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

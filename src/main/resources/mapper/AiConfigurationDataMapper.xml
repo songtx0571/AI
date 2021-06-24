@@ -47,4 +47,32 @@
             limit ${page},${pageSize}
         </if>
     </select>
+    <select id="getAiConfigureDataCountByMap" resultType="java.lang.Long">
+        select count(*) from ai_configure_data d
+        left join ai_data_configure c on c.id=d.aiConfigurationId
+        <where>
+            <if test="addressId!=null">
+                and d.addressId=#{addressId}
+            </if>
+            <if test="departmentId!=null">
+                and d.departmentId=#{departmentId}
+            </if>
+            <if test="mesuringPoint!=null">
+                and d.mesuringPoint=#{mesuringPoint}
+            </if>
+            <if test="startTime!=null and endTime!=null">
+                and DATE_FORMAT(d.`time`,'%Y-%m-%d')&gt;=DATE_FORMAT(#{startTime},'%Y-%m-%d')
+                and DATE_FORMAT(d.`time`,'%Y-%m-%d')&lt;=DATE_FORMAT(#{endTime},'%Y-%m-%d')
+            </if>
+            <if test="startTime!=null and endTime==null">
+                and DATE_FORMAT(d.`time`,'%Y-%m-%d')&gt;=DATE_FORMAT(#{startTime},'%Y-%m-%d')
+            </if>
+            <if test="startTime==null and endTime!=null">
+                and DATE_FORMAT(d.`time`,'%Y-%m-%d')&lt;=DATE_FORMAT(#{endTime},'%Y-%m-%d')
+            </if>
+        </where>
+        <if test="page!=null and pageSize!=null">
+            limit ${page},${pageSize}
+        </if>
+    </select>
 </mapper>
